@@ -19,6 +19,7 @@ export class Card{
         this.num = n;
         this.stageWidth = sw;
         this.stageHeight = sh;
+        this.shadowColor = 'rgba(0, 0, 0, 0.5)';
     }
 
     resize(sw, sh, w, h, hand) {
@@ -33,7 +34,8 @@ export class Card{
         this.move();
 
         ctx.save();
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+        ctx.shadowColor = this.shadowColor;
+        console.log(ctx.shadowColor);
         ctx.shadowBlur = 10;
         ctx.shadowOffsetX = 5;
         ctx.shadowOffsetY = 5;
@@ -79,6 +81,14 @@ export class Card{
     }
     showCard() {
         return new showCard(this.hand, this.num, this.stageWidth, this.stageHeight);
+    }
+
+    select() {
+        this.shadowColor = 'rgba(0, 150, 0, 0.7)';
+    }
+
+    deSelect() {
+        this.shadowColor = 'rgba(0, 0, 0, 0.5)';
     }
     
 }

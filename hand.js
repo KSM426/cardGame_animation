@@ -46,7 +46,7 @@ export class Hand{
 
     draw() {
         if(this.cardNum >= 9) return ;
-        this.cards[this.cardNum] = new Card(this.cardW, this.cardH, this.hand, this.cardNum, this.stageWidth, this.stageHeight);
+        this.cards[this.cardNum] = new Card(this.cardW, this.cardH, this.hand, this.newCardNum, this.stageWidth, this.stageHeight);
         this.cardNum++;
         if(this.cardNum == 1){
             this.cards[0].locate(-PI);
@@ -72,6 +72,7 @@ export class Hand{
             if(this.cards[i].mouseIn(e.x, e.y)) {
                 this.cards.splice(i, 1);
                 this.cardNum--;
+                this.showCard = 0;
                 break;
             }
         }
@@ -96,6 +97,13 @@ export class Hand{
                 break;
             } else {
                 this.showCard = 0;
+            }
+        }
+        for(let i=this.cards.length-1; i>=0; i--) {
+            if(this.cards[i].mouseIn(e.x, e.y)) {
+                this.cards[i].select();
+            } else {
+                this.cards[i].deSelect();
             }
         }
     }
